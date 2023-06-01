@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "586012277192",
+    "project_id": "lazeez-kitchen-876f3",
+    "storage_bucket": "lazeez-kitchen-876f3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586012277192:android:4af53ae73df4ae902768fd",
+        "android_client_info": {
+          "package_name": "com.lazeez.kitchen"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586012277192-0qo3vo03hd7ok3k8prhe0209v8ph4jut.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lazeez.kitchen",
+            "certificate_hash": "7e691f01966d049a759ca5855e092600799058ba"
+          }
+        },
+        {
+          "client_id": "586012277192-dd98juapol13l945pv6c12dlbunat2kr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIEXKy71TPwH9RQjuL85iWpe8gEveUM5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586012277192-8m04oke5sa6mslamphsaovrd6dn2dd5k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "LazeezKitchen",
-    "slug": "LazeezKitchen",
+    "name": "lazzez-app",
+    "slug": "lazzez-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,6 +11,29 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
+    "plugins": [
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow $(PRODUCT_NAME) to use your location."
+        }
+      ],
+      ["@react-native-google-signin/google-signin"],
+      [
+        "react-native-fbsdk-next",
+        {
+          "appID": "1848014555585292",
+          "clientToken": "168c15f73f535458494200b0d9007586",
+          "displayName": "lazeez_kitchen"
+        }
+      ]
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -18,13 +41,20 @@
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.RECORD_AUDIO"
+      ]
     },
-    "web": {
-      "favicon": "./assets/favicon.png"
+    "extra": {
+      "eas": {
+        "projectId": "a8caa74a-4f67-4f0e-af94-3056afcd223c"
+      }
     }
   }
 }
