@@ -41,6 +41,43 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:586012277192:android:da73ccdcbb6bb9ae2768fd",
+        "android_client_info": {
+          "package_name": "com.sprint17.lazzezapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "586012277192-e1grhdotaemm1v099c1v9ccb5j6d8nrn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sprint17.lazzezapp",
+            "certificate_hash": "253ef6ce0581562ded004320746bfd06aa218d53"
+          }
+        },
+        {
+          "client_id": "586012277192-dd98juapol13l945pv6c12dlbunat2kr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIEXKy71TPwH9RQjuL85iWpe8gEveUM5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "586012277192-8m04oke5sa6mslamphsaovrd6dn2dd5k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

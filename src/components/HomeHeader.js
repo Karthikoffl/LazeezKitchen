@@ -14,8 +14,10 @@ const HomeHeader = () => {
           />
         </HomeLogo>
         <LocationView>
-          <Text style={{ padding: 5 }}>Chennai, Tamilnadu</Text>
-          <Feather name="map-pin" size={24} color="#F49F1C" />
+          <TouchableOpacity>
+            <Text style={{ padding: 5 }}>Chennai, Tamilnadu</Text>
+            <Feather name="map-pin" size={24} color="#F49F1C" />
+          </TouchableOpacity>
         </LocationView>
       </Header>
       <SearchView>
