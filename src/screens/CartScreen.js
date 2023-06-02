@@ -172,7 +172,7 @@ const CartScreen = () => {
               shadowColor: "#171717",
               shadowOpacity: 0.2,
             }}
-            onPress={() => {}}
+            onPress={() => navigation.navigate("Coupons")}
           >
             <Text style={{ fontSize: 16, fontWeight: "600", color: "#fff" }}>
               Apply

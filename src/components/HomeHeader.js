@@ -2,8 +2,11 @@ import { View, Text, Image, TouchableOpacity, TextInput } from "react-native";
 import React from "react";
 import { Feather, AntDesign, FontAwesome } from "@expo/vector-icons";
 import { Header, HomeLogo, LocationView, SearchView } from "../global/styles";
+import { useNavigation } from "@react-navigation/native";
 
 const HomeHeader = () => {
+  const navigation = useNavigation();
+
   return (
     <View>
       <Header>
@@ -14,7 +17,10 @@ const HomeHeader = () => {
           />
         </HomeLogo>
         <LocationView>
-          <TouchableOpacity>
+          <TouchableOpacity
+            style={{ alignItems: "center", flexDirection: "row" }}
+            onPress={() => navigation.navigate("MapScreen")}
+          >
             <Text style={{ padding: 5 }}>Chennai, Tamilnadu</Text>
             <Feather name="map-pin" size={24} color="#F49F1C" />
           </TouchableOpacity>

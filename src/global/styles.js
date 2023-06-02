@@ -115,7 +115,8 @@ export const LocationView = styled.View`
   flex: 0.5;
   flex-direction: row;
   align-items: center;
-  margin-right: 15px;
+  justify-content: center;
+  margin-right: 5px;
 `;
 
 export const SearchView = styled.View`

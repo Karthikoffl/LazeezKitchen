@@ -30,6 +30,7 @@ const UserNameView = styled.View`
 const UserName = styled.Text`
   font-size: 16px;
   font-weight: bold;
+  text-align: center;
 `;
 
 const ProfileOptionButtonContainer = styled.View`
