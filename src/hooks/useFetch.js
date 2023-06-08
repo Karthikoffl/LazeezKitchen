@@ -7,7 +7,7 @@ const useFetch = (uri) => {
   const [loading, setLoading] = useState(null);
 
   useEffect(() => {
-    const fetchDate = async () => {
+    const fetchData = async () => {
       setLoading(true);
       try {
         const res = await fetch(url);
