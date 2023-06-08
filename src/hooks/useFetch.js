@@ -10,7 +10,7 @@ const useFetch = (uri) => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const res = await fetch(url);
+        const res = await fetch(uri);
         const json = await res.json();
 
         setData(json);
@@ -21,7 +21,7 @@ const useFetch = (uri) => {
       }
     };
     fetchData();
-  }, [url]);
+  }, [uri]);
 
   return { loading, error, data };
 };

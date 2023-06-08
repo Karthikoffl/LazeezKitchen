@@ -1,16 +1,26 @@
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
-// import { getCategories } from '../api';
+import axios from "axios";
 
 const FoodCard = ({ id, title, button }) => {
-  // const [products, setProducts] = useState([]);
+  const [data, setData] = useState([]);
 
-  // useEffect(() => {
-  //   getCategories().then((data) =>{
-  //     setCategories(data);
-  //   });
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = axios.get(process.env.REACT_APP_API_URL + "/products", {
+          headers: {
+            Authorization: "bearer" + process.env.REACT_APP_API_TOKEN,
+          },
+        });
+        setData(res.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <View>
