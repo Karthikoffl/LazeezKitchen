@@ -3,14 +3,18 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import CartScreen from "../screens/CartScreen";
 import CheckoutScreen from "../screens/CheckoutScreen";
 import CartItem from "../components/CartItem";
-import OrderSuccess from "../screens/OrderSuccess";
-import OrderFailed from "../screens/OrderFailed";
+import EmptyCart from "../screens/EmptyCart";
 
 const Stack = createNativeStackNavigator();
 
 const CheckoutNavigator = () => {
   return (
     <Stack.Navigator>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="EmptyCart"
+        component={EmptyCart}
+      />
       <Stack.Screen
         options={{ gestureEnabled: false, headerShown: false }}
         name="Cart"
@@ -25,16 +29,6 @@ const CheckoutNavigator = () => {
         options={{ gestureEnabled: false, headerShown: false }}
         name="Checkout"
         component={CheckoutScreen}
-      />
-      <Stack.Screen
-        options={{ gestureEnabled: false, headerShown: false }}
-        name="Success"
-        component={OrderSuccess}
-      />
-      <Stack.Screen
-        options={{ headerShown: false }}
-        name="Failed"
-        component={OrderFailed}
       />
     </Stack.Navigator>
   );
