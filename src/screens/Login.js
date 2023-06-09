@@ -28,7 +28,13 @@ import * as Animatable from "react-native-animatable";
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { onLogin, error, isLoading } = useContext(AuthenticationContext);
+  const {
+    onLogin,
+    // onGoogleButtonPress,
+    // onFacebookButtonPress,
+    error,
+    isLoading,
+  } = useContext(AuthenticationContext);
 
   return (
     <MainView>
