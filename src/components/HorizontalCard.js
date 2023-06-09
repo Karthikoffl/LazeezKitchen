@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import axios from "axios";
 
-const FoodCard = ({ id, title, button, item }) => {
+const FoodCard = ({ id, title, button, type }) => {
   const [data, setData] = useState([]);
 
   useEffect(() => {

@@ -5,6 +5,8 @@ import Categories from "../components/Categories";
 import MainCarousel from "../components/MainCarousel";
 import HomeHeader from "../components/HomeHeader";
 import { useNavigation } from "@react-navigation/native";
+import HorizontalCard from "../components/HorizontalCard";
+import VerticalCard from "../components/VerticalCard";
 
 const HomeScreen = () => {
   const navigation = useNavigation();
@@ -46,6 +48,8 @@ const HomeScreen = () => {
       >
         <MainCarousel />
         <Categories />
+        <HorizontalCard id="0" title="Set Menu" button="View All" />
+        <VerticalCard id="0" title="Popular Items" button="View All" />
       </ScrollView>
     </MainHomeView>
   );

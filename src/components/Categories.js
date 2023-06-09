@@ -8,9 +8,6 @@ import {
 } from "react-native";
 import React, { useState } from "react";
 import { filterData } from "../global/Data";
-import HorizontalCard from "./HorizontalCard";
-import VerticalCard from "./VerticalCard";
-
 const Categories = () => {
   const [indexCheck, setIndexCheck] = useState("0");
 
@@ -45,9 +42,6 @@ const Categories = () => {
           )}
         />
       </View>
-
-      <HorizontalCard id="0" title="Set Menu" button="View All" />
-      <VerticalCard id="0" title="Popular Items" button="View All" />
     </View>
   );
 };
