@@ -1,5 +1,10 @@
 import { View, Text, Pressable } from "react-native";
 import React, { useState } from "react";
+import {
+  decrementQuantity,
+  incrementQuantity,
+  removeFromCart,
+} from "../redux/reducers/cartReducer";
 
 const IncrementRadio = () => {
   let [count, setCount] = useState(0);
@@ -19,6 +24,17 @@ const IncrementRadio = () => {
     });
   }
 
+  const increaseQuantity = (item) => {
+    dispatch(incrementQuantity(item));
+  };
+  const decreaseQuantity = (item) => {
+    if (item.quantity == 1) {
+      dispatch(removeFromCart(item));
+    } else {
+      dispatch(decrementQuantity(item));
+    }
+  };
+
   return (
     <View
       style={{
@@ -33,13 +49,19 @@ const IncrementRadio = () => {
         maxWidth: 80,
       }}
     >
-      <Pressable style={{ paddingHorizontal: 6 }}>
+      <Pressable
+        style={{ paddingHorizontal: 6 }}
+        onPress={() => decreaseQuantity(item)}
+      >
         <Text style={{ padding: 5, fontSize: 20 }} onPress={decrement}>
           -
         </Text>
       </Pressable>
       <Text>{count}</Text>
-      <Pressable style={{ paddingHorizontal: 6 }}>
+      <Pressable
+        style={{ paddingHorizontal: 6 }}
+        onPress={() => increaseQuantity(item)}
+      >
         <Text style={{ padding: 5, fontSize: 20 }} onPress={increment}>
           +
         </Text>

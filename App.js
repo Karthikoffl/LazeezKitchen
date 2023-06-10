@@ -4,6 +4,8 @@ import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import Navigation from "./src/navigation";
 import { AuthenticationContextProvider } from "./src/authentication/authentication.context";
 import { initializeApp } from "firebase/app";
+import store from "./src/redux/store";
+import { Provider } from "react-redux";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQ2IANGd25OLeLXpQf96sIgKo7skCCFEc",
@@ -21,10 +23,12 @@ export default function App() {
 
   return (
     <>
-      <AuthenticationContextProvider>
-        <Navigation />
-      </AuthenticationContextProvider>
-      <ExpoStatusBar style="auto" />
+      <Provider store={store}>
+        <AuthenticationContextProvider>
+          <Navigation />
+        </AuthenticationContextProvider>
+        <ExpoStatusBar style="auto" />
+      </Provider>
     </>
   );
 }

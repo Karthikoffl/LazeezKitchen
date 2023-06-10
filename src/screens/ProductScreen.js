@@ -11,7 +11,8 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import RadioForm from "react-native-simple-radio-button";
 import IncrementRadio from "../components/IncrementRadio";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../redux/reducers/cartReducer";
 
 const ProductScreen = () => {
   const navigation = useNavigation();
@@ -32,12 +33,13 @@ const ProductScreen = () => {
     params: { id, title, image, delivery, rating },
   } = useRoute();
 
+  const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
-  const selectItem = (item) =>
-    dispatch({
-      type: "ADD_TO_CART",
-      payload: item,
-    });
+  console.log(cart);
+
+  const addItemToCart = (item) => {
+    dispatch(addToCart(item));
+  };
 
   return (
     <ScrollView>
@@ -234,6 +236,11 @@ const ProductScreen = () => {
               marginTop: 20,
             }}
           >
+            {/* {cart.some((value) => value.id == item.id) ? (
+
+            ) : (
+              
+            )} */}
             <TouchableOpacity
               style={{
                 backgroundColor: "#F49F1C",
@@ -241,7 +248,7 @@ const ProductScreen = () => {
                 paddingVertical: 20,
                 borderRadius: 10,
               }}
-              onPress={() => {}}
+              onPress={() => addItemToCart(item)}
             >
               <Text style={{ fontSize: 16, fontWeight: "600", color: "#fff" }}>
                 Add Item

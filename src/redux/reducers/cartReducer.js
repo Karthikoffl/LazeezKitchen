@@ -1,37 +1,54 @@
-let defaultState = {
-  selectedItems: { items: [], productName: "" },
-};
+import { createSlice } from "@reduxjs/toolkit";
 
-let cartReducer = (state = defaultState, action) => {
-  switch (action.type) {
-    case "ADD_TO_CART": {
-      let newState = { ...state };
-
-      if (action.payload.checkboxValue) {
-        console.log("ADD TO CART");
-
-        newState.selectedItems = {
-          items: [...newState.selectedItems.items, action.payload],
-          productName: action.payload.productName,
-        };
+export const cartSlice = createSlice({
+  name: "cart",
+  initialState: {
+    cart: [],
+  },
+  reducers: {
+    addToCart: (state, action) => {
+      const itemInCart = state.cart.find(
+        (item) => item.id == action.payload.id
+      );
+      if (itemInCart) {
+        itemInCart.quantity++;
       } else {
-        console.log("REMOVE FROM CART");
-        newState.selectedItems = {
-          items: [
-            ...newState.selectedItems.items.filter(
-              (item) => item.title !== action.payload.title
-            ),
-          ],
-          productName: action.payload.productName,
-        };
+        state.cart.push({ ...action.payload, quantity: 1 });
       }
-      console.log(newState);
-      return newState;
-    }
+    },
+    removeFromCart: (state, action) => {
+      const removeFromCart = state.cart.filter(
+        (item) => item.id !== action.payload.id
+      );
+      state.cart = removeFromCart;
+    },
+    incrementQuantity: (state, action) => {
+      const itemInCart = state.cart.find(
+        (item) => item.id == action.payload.id
+      );
+      itemInCart.quantity++;
+    },
+    decrementQuantity: (state, action) => {
+      const itemInCart = state.cart.find(
+        (item) => item.id == action.payload.id
+      );
+      if (itemInCart.quantity == 1) {
+        const removeFromCart = state.cart.filter(
+          (item) => item.id !== action.payload.id
+        );
+        state.cart = removeFromCart;
+      } else {
+        itemInCart.quantity--;
+      }
+    },
+  },
+});
 
-    default:
-      return state;
-  }
-};
+export const {
+  addToCart,
+  removeFromCart,
+  incrementQuantity,
+  decrementQuantity,
+} = cartSlice.actions;
 
-export default cartReducer;
+export default cartSlice.reducer;

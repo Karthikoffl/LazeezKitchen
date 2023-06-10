@@ -17,11 +17,16 @@ import { Surface } from "react-native-paper";
 import DashedLine from "react-native-dashed-line";
 import IncrementRadio from "../components/IncrementRadio";
 import SwitchSelector from "react-native-switch-selector";
+import { removeFromCart } from "../redux/reducers/cartReducer";
 
 const CartScreen = () => {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(true);
   const [dataSource, setDataSource] = useState([]);
+
+  const removeItemFromCart = (item) => {
+    dispatch(removeFromCart(item));
+  };
 
   const onRefresh = () => {
     //Clear old data of the list
@@ -85,7 +90,7 @@ const CartScreen = () => {
               marginBottom: 20,
             }}
           >
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={() => removeItemFromCart(item)}>
               <View style={{ position: "absolute", top: 5, left: 333 }}>
                 <MaterialIcons name="cancel" size={24} color="#F49F1C" />
               </View>
@@ -301,6 +306,9 @@ const CartScreen = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      {/* {cart.map((item, index) => (
+
+      ))} */}
     </SafeAreaView>
   );
 };
