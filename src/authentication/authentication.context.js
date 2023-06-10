@@ -6,9 +6,9 @@ import {
   getAuth,
 } from "firebase/auth";
 import { loginRequest } from "./authentication.service";
-import auth from "@react-native-firebase/auth";
-import { LoginManager, AccessToken } from "react-native-fbsdk-next";
-import { GoogleSignin } from "@react-native-google-signin/google-signin";
+// import auth from "@react-native-firebase/auth";
+// import { LoginManager, AccessToken } from "react-native-fbsdk-next";
+// import { GoogleSignin } from "@react-native-google-signin/google-signin";
 
 export const AuthenticationContext = createContext();
 

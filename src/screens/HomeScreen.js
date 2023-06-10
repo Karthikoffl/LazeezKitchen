@@ -22,7 +22,20 @@ const HomeScreen = () => {
 
   useEffect(() => {
     getData();
+    getProducts();
   }, []);
+
+  const getProducts = () => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch("http://localhost:1337/api/products", requestOptions)
+      .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
 
   const getData = () => {
     //Service to get the data from the server to render
