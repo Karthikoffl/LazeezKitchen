@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   StyleSheet,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { MaterialIcons, FontAwesome } from "@expo/vector-icons";
 import RadioForm from "react-native-simple-radio-button";
@@ -14,13 +14,36 @@ import IncrementRadio from "../components/IncrementRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/reducers/cartReducer";
 
-const ProductScreen = () => {
+const API_URL = "http://localhost:1337/api/products";
+
+const ProductScreen = ({ item, index }) => {
   const navigation = useNavigation();
   const [isPressed, setIsPressed] = useState(false);
   const [selected, setSelected] = useState(false);
   const [selected1, setSelected1] = useState(false);
   const [selected2, setSelected2] = useState(false);
   const [selected3, setSelected3] = useState(false);
+
+  const [usersData, setUsersData] = useState([]);
+
+  const getUsersData = () => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+    useEffect(() => {
+      getUsersData();
+    }, []);
+
+    fetch(API_URL, requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setUsersData(result?.data);
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  };
 
   const [value, setValue] = useState(0);
   const extras = [
@@ -65,7 +88,9 @@ const ProductScreen = () => {
             paddingTop: 30,
           }}
         >
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>{title}</Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+            {item?.attributes.title}
+          </Text>
           <TouchableOpacity
             style={{ paddingLeft: 118 }}
             onPress={() => setIsPressed((isPressed) => !isPressed)}
@@ -126,11 +151,7 @@ const ProductScreen = () => {
             alignItems: "center",
           }}
         >
-          <Text>
-            Lorem ipsum dolor sit amet, consectetur adipiscing. Nunc eleifend
-            metus pulvinar mattis.Lorem ipsum dolor sit amet, consectetur
-            adipiscing.
-          </Text>
+          <Text>{item?.attributes.description}</Text>
         </View>
         <View style={{ paddingHorizontal: 20 }}>
           <Text style={{ fontWeight: "600", fontSize: 22 }}>Extra</Text>

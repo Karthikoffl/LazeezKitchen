@@ -1,8 +1,26 @@
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import RestaurantCardVertical from "./RestaurantCardVertical";
+import axios from "axios";
 
-const VerticalCard = ({ id, title, button }) => {
+// const API_URL = "http://localhost:1337/api/products";
+
+const VerticalCard = ({ id, title, button, item, index }) => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:1337/api/products");
+        setData(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <View>
       <View style={{ flex: 1 }}>
@@ -38,10 +56,10 @@ const VerticalCard = ({ id, title, button }) => {
       >
         <View style={{ paddingVertical: 5 }}>
           <RestaurantCardVertical
-            id={0}
-            image={require("../assets/images/food.png")}
-            title="Tasty Pakistani Dish"
-            price="₹ 350"
+            id={item?.id}
+            image={{ uri: item?.attributes.image }}
+            title={item?.attributes.title}
+            price={item?.attributes.price}
             delivery="Free Delivery"
           />
         </View>
