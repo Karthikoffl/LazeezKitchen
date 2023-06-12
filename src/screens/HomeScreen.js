@@ -61,8 +61,8 @@ const HomeScreen = () => {
       >
         <MainCarousel />
         <Categories />
-        <HorizontalCard id="0" title="Set Menu" button="View All" />
-        <VerticalCard id="0" title="Popular Items" button="View All" />
+        <HorizontalCard />
+        <VerticalCard />
       </ScrollView>
     </MainHomeView>
   );

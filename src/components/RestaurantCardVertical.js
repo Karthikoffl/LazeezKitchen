@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { FontAwesome, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const RestaurantCardVertical = ({ id, image, title, rating, delivery }) => {
+const RestaurantCardVertical = ({ item }) => {
   const [isPressed, setIsPressed] = useState(false);
   const navigation = useNavigation();
 
@@ -19,17 +19,16 @@ const RestaurantCardVertical = ({ id, image, title, rating, delivery }) => {
       }}
       onPress={() => {
         navigation.navigate("ProductScreen", {
-          id,
-          image,
+          item,
+          img,
           title,
-          rating,
-          delivery,
+          price,
         });
       }}
     >
       <View style={{ flexDirection: "row", width: 150 }}>
         <Image
-          source={image}
+          source={item.img}
           style={{
             height: 90,
             width: 130,
@@ -61,11 +60,10 @@ const RestaurantCardVertical = ({ id, image, title, rating, delivery }) => {
           style={{ position: "absolute", left: 166, top: 70, zIndex: -1 }}
           onPress={() =>
             navigation.navigate("ProductScreen", {
-              id,
-              image,
+              item,
+              img,
               title,
-              rating,
-              delivery,
+              price,
             })
           }
         >
@@ -73,7 +71,9 @@ const RestaurantCardVertical = ({ id, image, title, rating, delivery }) => {
         </TouchableOpacity>
         <View>
           <View style={{ paddingTop: 10 }}>
-            <Text style={{ fontWeight: "bold", fontSize: 16 }}>{title}</Text>
+            <Text style={{ fontWeight: "bold", fontSize: 14 }}>
+              {item.title}
+            </Text>
           </View>
           <View
             style={{ paddingTop: 5, paddingBottom: 5, flexDirection: "row" }}
@@ -112,7 +112,7 @@ const RestaurantCardVertical = ({ id, image, title, rating, delivery }) => {
           <View style={{ paddingVertical: 10 }}>
             {/* <Currency quantity={price} currency="INR" /> */}
             <Text style={{ fontSize: 16, fontWeight: 600, color: "#4B4B4B" }}>
-              ₹350
+              {item.price}
             </Text>
           </View>
         </View>

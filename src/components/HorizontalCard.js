@@ -3,27 +3,59 @@ import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
 import axios from "axios";
 
-const FoodCard = ({ id, title, button, type }) => {
-  const [data, setData] = useState([]);
+const FoodCard = ({ item, index }) => {
+  const [products, setProducts] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = axios.get(
-          process.env.REACT_APP_API_URL + "/products?populate=*",
-          {
-            headers: {
-              Authorization: "bearer" + process.env.REACT_APP_API_TOKEN,
-            },
-          }
-        );
-        setData(res.data.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
+  //const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios.get(
+  //         process.env.REACT_APP_API_URL + "/products?populate=*",
+  //         {
+  //           headers: {
+  //             Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
+  //           },
+  //         }
+  //       );
+  //       setData(res.data.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
+
+  const data = [
+    {
+      id: 1,
+      img: require("../assets/images/food.png"),
+      title: "Green Curry With Egg",
+      price: "₹ 150",
+      delivery: "Free Delivery",
+    },
+    {
+      id: 2,
+      img: require("../assets/images/food.png"),
+      title: "Green Curry With Egg",
+      price: "₹ 160",
+      delivery: "Free Delivery",
+    },
+    {
+      id: 3,
+      img: require("../assets/images/food.png"),
+      title: "Green Curry With Egg",
+      price: "₹ 170",
+      delivery: "Free Delivery",
+    },
+    {
+      id: 4,
+      img: require("../assets/images/food.png"),
+      title: "Green Curry With Egg",
+      price: "₹ 180",
+      delivery: "Free Delivery",
+    },
+  ];
 
   return (
     <View>
@@ -37,7 +69,7 @@ const FoodCard = ({ id, title, button, type }) => {
             justifyContent: "space-between",
           }}
         >
-          <Text style={{ fontWeight: 600, fontSize: 18 }}>{title}</Text>
+          <Text style={{ fontWeight: 600, fontSize: 18 }}>Set Menu</Text>
           <TouchableOpacity
             style={{
               alignItems: "center",
@@ -48,7 +80,7 @@ const FoodCard = ({ id, title, button, type }) => {
             <Text
               style={{ color: "#F49F1C", fontSize: 14, textAlign: "center" }}
             >
-              {button}
+              View All
             </Text>
           </TouchableOpacity>
         </View>
@@ -59,33 +91,11 @@ const FoodCard = ({ id, title, button, type }) => {
         showsHorizontalScrollIndicator={false}
         style={{ paddingTop: 4, marginTop: 10 }}
       >
-        <View style={{ paddingHorizontal: 7 }}>
-          <RestaurantCard
-            id={0}
-            image={require("../assets/images/food.png")}
-            title="Green Curry With Eggs"
-            rating={5}
-            delivery="Free Delivery"
-          />
-        </View>
-        <View style={{ paddingHorizontal: 7 }}>
-          <RestaurantCard
-            id={0}
-            image={require("../assets/images/food.png")}
-            title="Green Curry With Eggs"
-            rating={5}
-            delivery="Free Delivery"
-          />
-        </View>
-        <View style={{ paddingHorizontal: 7 }}>
-          <RestaurantCard
-            id={0}
-            image={require("../assets/images/food.png")}
-            title="Green Curry With Eggs"
-            rating={5}
-            delivery="Free Delivery"
-          />
-        </View>
+        {data.map((item) => (
+          <View style={{ paddingHorizontal: 7 }}>
+            <RestaurantCard item={item} key={item.id} />
+          </View>
+        ))}
       </ScrollView>
     </View>
   );

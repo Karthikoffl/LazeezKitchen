@@ -52,9 +52,9 @@ const ProductScreen = ({ item, index }) => {
     { label: "Mid Fries", value: 2 },
   ];
 
-  const {
-    params: { id, title, image, delivery, rating },
-  } = useRoute();
+  // const {
+  //   params: { id, title, image, delivery, rating },
+  // } = useRoute();
 
   const cart = useSelector((state) => state.cart.cart);
   const dispatch = useDispatch();
@@ -68,7 +68,7 @@ const ProductScreen = ({ item, index }) => {
     <ScrollView>
       <View style={{ position: "relative" }}>
         <Image
-          source={image}
+          source={item.img}
           style={{ width: "100%", height: 200, backgroundColor: "#fff" }}
         />
         {/* <TouchableOpacity 
@@ -88,9 +88,7 @@ const ProductScreen = ({ item, index }) => {
             paddingTop: 30,
           }}
         >
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
-            {item?.attributes.title}
-          </Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>{item.title}</Text>
           <TouchableOpacity
             style={{ paddingLeft: 118 }}
             onPress={() => setIsPressed((isPressed) => !isPressed)}
@@ -151,7 +149,7 @@ const ProductScreen = ({ item, index }) => {
             alignItems: "center",
           }}
         >
-          <Text>{item?.attributes.description}</Text>
+          <Text>{item.description}</Text>
         </View>
         <View style={{ paddingHorizontal: 20 }}>
           <Text style={{ fontWeight: "600", fontSize: 22 }}>Extra</Text>

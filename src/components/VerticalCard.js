@@ -3,23 +3,52 @@ import React, { useState, useEffect } from "react";
 import RestaurantCardVertical from "./RestaurantCardVertical";
 import axios from "axios";
 
-// const API_URL = "http://localhost:1337/api/products";
+const VerticalCard = ({ item, index }) => {
+  const [products, setProducts] = useState([]);
 
-const VerticalCard = ({ id, title, button, item, index }) => {
-  const [data, setData] = useState([]);
+  //const [data, setData] = useState([]);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios.get(
+  //         process.env.REACT_APP_API_URL + "/products?populate=*",
+  //         {
+  //           headers: {
+  //             Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
+  //           },
+  //         }
+  //       );
+  //       setData(res.data.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get("http://localhost:1337/api/products");
-        setData(response.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
+  const data = [
+    {
+      id: 1,
+      img: require("../assets/images/food.png"),
+      title: "Green Curry With Egg",
+      price: "₹ 150",
+      delivery: "Free Delivery",
+    },
+    {
+      id: 2,
+      img: require("../assets/images/food.png"),
+      title: "Green Curry With Egg",
+      price: "₹ 160",
+      delivery: "Free Delivery",
+    },
+    {
+      id: 3,
+      img: require("../assets/images/food.png"),
+      title: "Green Curry With Egg",
+      price: "₹ 170",
+      delivery: "Free Delivery",
+    },
+  ];
 
   return (
     <View>
@@ -33,7 +62,7 @@ const VerticalCard = ({ id, title, button, item, index }) => {
             justifyContent: "space-between",
           }}
         >
-          <Text style={{ fontWeight: 600, fontSize: 18 }}>{title}</Text>
+          <Text style={{ fontWeight: 600, fontSize: 18 }}>Popular Items</Text>
           <TouchableOpacity
             style={{
               alignItems: "center",
@@ -44,7 +73,7 @@ const VerticalCard = ({ id, title, button, item, index }) => {
             <Text
               style={{ color: "#F49F1C", fontSize: 14, textAlign: "center" }}
             >
-              {button}
+              View All
             </Text>
           </TouchableOpacity>
         </View>
@@ -54,42 +83,11 @@ const VerticalCard = ({ id, title, button, item, index }) => {
         showVerticalScrollIndicator={false}
         style={{ padding: 4, marginTop: 5 }}
       >
-        <View style={{ paddingVertical: 5 }}>
-          <RestaurantCardVertical
-            id={item?.id}
-            image={{ uri: item?.attributes.image }}
-            title={item?.attributes.title}
-            price={item?.attributes.price}
-            delivery="Free Delivery"
-          />
-        </View>
-        <View style={{ paddingVertical: 5 }}>
-          <RestaurantCardVertical
-            id={0}
-            image={require("../assets/images/food.png")}
-            title="Tasty Pakistani Dish"
-            price="₹ 350"
-            delivery="Free Delivery"
-          />
-        </View>
-        <View style={{ paddingVertical: 5 }}>
-          <RestaurantCardVertical
-            id={0}
-            image={require("../assets/images/food.png")}
-            title="Tasty Pakistani Dish"
-            price="₹ 350"
-            delivery="Free Delivery"
-          />
-        </View>
-        <View style={{ paddingVertical: 5 }}>
-          <RestaurantCardVertical
-            id={0}
-            image={require("../assets/images/food.png")}
-            title="Tasty Pakistani Dish"
-            price="₹ 350"
-            delivery="Free Delivery"
-          />
-        </View>
+        {data.map((item) => (
+          <View style={{ paddingVertical: 5 }}>
+            <RestaurantCardVertical item={item} key={item.id} />
+          </View>
+        ))}
       </ScrollView>
     </View>
   );

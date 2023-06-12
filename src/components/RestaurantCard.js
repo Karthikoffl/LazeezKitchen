@@ -3,7 +3,7 @@ import React from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const RestaurantCard = ({ id, image, title, rating, delivery }) => {
+const RestaurantCard = ({ item }) => {
   const navigation = useNavigation();
 
   return (
@@ -18,21 +18,20 @@ const RestaurantCard = ({ id, image, title, rating, delivery }) => {
       }}
       onPress={() => {
         navigation.navigate("ProductScreen", {
-          id,
-          image,
+          img,
           title,
-          rating,
+          price,
           delivery,
         });
       }}
     >
       <Image
-        source={image}
+        source={item.img}
         style={{ height: 100, width: 170, borderRadius: 5 }}
       />
       <View style={{ paddingHorizontal: 10 }}>
         <View style={{ paddingTop: 10 }}>
-          <Text style={{ fontWeight: "bold", fontSize: 12 }}>{title}</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 12 }}>{item.title}</Text>
         </View>
         <View style={{ flexDirection: "row", paddingVertical: 7 }}>
           <FontAwesome
@@ -67,7 +66,7 @@ const RestaurantCard = ({ id, image, title, rating, delivery }) => {
           />
         </View>
         <View style={{ alignItems: "center", paddingTop: 7 }}>
-          <Text style={{ fontSize: 12 }}>{delivery}</Text>
+          <Text style={{ fontSize: 12 }}>{item.delivery}</Text>
         </View>
       </View>
     </TouchableOpacity>
