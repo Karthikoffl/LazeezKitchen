@@ -6,23 +6,25 @@ import axios from "axios";
 const FoodCard = ({ item, index }) => {
   const [products, setProducts] = useState([]);
 
-  //const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
+
+  // const fetchData = async () => {
+  //   try {
+  //     const res = await axios.get(
+  //       process.env.REACT_APP_API_URL + "/products?populate=*",
+  //       {
+  //         headers: {
+  //           Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
+  //         },
+  //       }
+  //     );
+  //     console.log(res);
+  //     setData(res.data.data);
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
   // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await axios.get(
-  //         process.env.REACT_APP_API_URL + "/products?populate=*",
-  //         {
-  //           headers: {
-  //             Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
-  //           },
-  //         }
-  //       );
-  //       setData(res.data.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
   //   fetchData();
   // }, []);
 

@@ -1,14 +1,24 @@
-import { View, Text, SafeAreaView } from "react-native";
+import { View, Text, SafeAreaView, StyleSheet } from "react-native";
 import React from "react";
+import MapView from "react-native-maps";
 
 const MapScreen = () => {
+  const onRegionChange = (region) => {
+    console.log(region);
+  };
+
   return (
-    <SafeAreaView
-      style={{ flex: 1, alignSelf: "center", justifyContent: "center" }}
-    >
-      <Text>MapScreen</Text>
-    </SafeAreaView>
+    <View style={{ flex: 1, alignSelf: "center", justifyContent: "center" }}>
+      <MapView style={styles.map} onRegionChange={onRegionChange}></MapView>
+    </View>
   );
 };
 
 export default MapScreen;
+
+const styles = StyleSheet.create({
+  map: {
+    width: "100%",
+    height: "100%",
+  },
+});
