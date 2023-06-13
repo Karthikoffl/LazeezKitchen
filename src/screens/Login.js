@@ -23,11 +23,12 @@ import {
 import { TextInput } from "react-native-paper";
 import { AuthenticationContext } from "../authentication/authentication.context";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
-import * as Animatable from "react-native-animatable";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [visible, setVisible] = useState(true);
+
   const {
     onLogin,
     // onGoogleButtonPress,
@@ -60,19 +61,23 @@ const Login = ({ navigation }) => {
               autoCapitalize="none"
             />
           </View>
-          <Animatable.View>
-            <TextInput
-              style={{ marginTop: 20 }}
-              mode="outlined"
-              activeOutlineColor="#F49F1C"
-              placeholder="Password"
-              label="Password"
-              autoCapitalize="none"
-              secureTextEntry
-              onChangeText={(p) => setPassword(p)}
-              value={password}
-            />
-          </Animatable.View>
+          <TextInput
+            value={password}
+            style={{ marginTop: 20 }}
+            secureTextEntry={visible}
+            mode="outlined"
+            activeOutlineColor="#F49F1C"
+            placeholder="Password"
+            label="Password"
+            autoCapitalize="none"
+            onChangeText={(p) => setPassword(p)}
+            right={
+              <TextInput.Icon
+                icon={visible ? "eye-off" : "eye"}
+                onPress={() => setVisible(!visible)}
+              />
+            }
+          />
           {!isLoading ? (
             <LoginButton onPress={() => onLogin(email, password)}>
               <ButtonText>Login</ButtonText>

@@ -14,36 +14,13 @@ import IncrementRadio from "../components/IncrementRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/reducers/cartReducer";
 
-const API_URL = "http://localhost:1337/api/products";
-
-const ProductScreen = ({ item, index }) => {
+const ProductScreen = ({ item }) => {
   const navigation = useNavigation();
   const [isPressed, setIsPressed] = useState(false);
   const [selected, setSelected] = useState(false);
   const [selected1, setSelected1] = useState(false);
   const [selected2, setSelected2] = useState(false);
   const [selected3, setSelected3] = useState(false);
-
-  const [usersData, setUsersData] = useState([]);
-
-  const getUsersData = () => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-    useEffect(() => {
-      getUsersData();
-    }, []);
-
-    fetch(API_URL, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        setUsersData(result?.data);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  };
 
   const [value, setValue] = useState(0);
   const extras = [
@@ -53,7 +30,7 @@ const ProductScreen = ({ item, index }) => {
   ];
 
   // const {
-  //   params: { id, title, image, delivery, rating },
+  //   params: { id, title, img, delivery, rating },
   // } = useRoute();
 
   const cart = useSelector((state) => state.cart.cart);

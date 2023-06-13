@@ -25,6 +25,7 @@ const Register = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [repeatedPassword, setRepeatedPassword] = useState("");
   const { onRegister, isLoading, error } = useContext(AuthenticationContext);
+  const [visible, setVisible] = useState(true);
 
   return (
     <MainView>
@@ -56,6 +57,12 @@ const Register = ({ navigation }) => {
             secureTextEntry
             onChangeText={(p) => setPassword(p)}
             value={password}
+            right={
+              <TextInput.Icon
+                icon={visible ? "eye-off" : "eye"}
+                onPress={() => setVisible(!visible)}
+              />
+            }
           />
           <TextInput
             style={{ marginTop: 20 }}
@@ -67,6 +74,12 @@ const Register = ({ navigation }) => {
             secureTextEntry
             onChangeText={(p) => setRepeatedPassword(p)}
             value={repeatedPassword}
+            right={
+              <TextInput.Icon
+                icon={visible ? "eye-off" : "eye"}
+                onPress={() => setVisible(!visible)}
+              />
+            }
           />
           {!isLoading ? (
             <LoginButton
