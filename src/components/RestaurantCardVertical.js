@@ -20,7 +20,7 @@ const RestaurantCardVertical = ({ item }) => {
       onPress={() => {
         navigation.navigate("ProductScreen", {
           item,
-          img,
+          product_Image,
           title,
           price,
         });
@@ -28,7 +28,10 @@ const RestaurantCardVertical = ({ item }) => {
     >
       <View style={{ flexDirection: "row", width: 150 }}>
         <Image
-          source={item.img}
+          source={
+            process.env.REACT_APP_UPLOAD_URL +
+            item.attributes?.product_Image?.data?.attributes?.url
+          }
           style={{
             height: 90,
             width: 130,
@@ -61,7 +64,7 @@ const RestaurantCardVertical = ({ item }) => {
           onPress={() =>
             navigation.navigate("ProductScreen", {
               item,
-              img,
+              product_Image,
               title,
               price,
             })
@@ -72,7 +75,7 @@ const RestaurantCardVertical = ({ item }) => {
         <View>
           <View style={{ paddingTop: 10 }}>
             <Text style={{ fontWeight: "bold", fontSize: 14 }}>
-              {item.title}
+              {item?.attributes.title}
             </Text>
           </View>
           <View
@@ -112,7 +115,7 @@ const RestaurantCardVertical = ({ item }) => {
           <View style={{ paddingVertical: 10 }}>
             {/* <Currency quantity={price} currency="INR" /> */}
             <Text style={{ fontSize: 16, fontWeight: 600, color: "#4B4B4B" }}>
-              {item.price}
+              {item?.attributes.price}
             </Text>
           </View>
         </View>

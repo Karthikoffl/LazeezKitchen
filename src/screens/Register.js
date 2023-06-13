@@ -76,7 +76,7 @@ const Register = ({ navigation }) => {
             value={repeatedPassword}
             right={
               <TextInput.Icon
-                icon={visible ? "eye-off" : "eye"}
+                icon={visible ? "eye-off-outline" : "eye-outline"}
                 onPress={() => setVisible(!visible)}
               />
             }

@@ -4,7 +4,7 @@ import RestaurantCard from "./RestaurantCard";
 import axios from "axios";
 
 const FoodCard = ({ item, index }) => {
-  const [products, setProducts] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -17,6 +17,7 @@ const FoodCard = ({ item, index }) => {
             },
           }
         );
+        console.log(res);
         setData(res.data.data);
       } catch (err) {
         console.log(err);
@@ -25,36 +26,36 @@ const FoodCard = ({ item, index }) => {
     fetchData();
   }, []);
 
-  const data = [
-    {
-      id: 1,
-      img: require("../assets/images/food.png"),
-      title: "Green Curry With Egg",
-      price: "₹ 150",
-      delivery: "Free Delivery",
-    },
-    {
-      id: 2,
-      img: require("../assets/images/food.png"),
-      title: "Green Curry With Egg",
-      price: "₹ 160",
-      delivery: "Free Delivery",
-    },
-    {
-      id: 3,
-      img: require("../assets/images/food.png"),
-      title: "Green Curry With Egg",
-      price: "₹ 170",
-      delivery: "Free Delivery",
-    },
-    {
-      id: 4,
-      img: require("../assets/images/food.png"),
-      title: "Green Curry With Egg",
-      price: "₹ 180",
-      delivery: "Free Delivery",
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     img: require("../assets/images/food.png"),
+  //     title: "Green Curry With Egg",
+  //     price: "₹ 150",
+  //     delivery: "Free Delivery",
+  //   },
+  //   {
+  //     id: 2,
+  //     img: require("../assets/images/food.png"),
+  //     title: "Green Curry With Egg",
+  //     price: "₹ 160",
+  //     delivery: "Free Delivery",
+  //   },
+  //   {
+  //     id: 3,
+  //     img: require("../assets/images/food.png"),
+  //     title: "Green Curry With Egg",
+  //     price: "₹ 170",
+  //     delivery: "Free Delivery",
+  //   },
+  //   {
+  //     id: 4,
+  //     img: require("../assets/images/food.png"),
+  //     title: "Green Curry With Egg",
+  //     price: "₹ 180",
+  //     delivery: "Free Delivery",
+  //   },
+  // ];
 
   return (
     <View>

@@ -4,51 +4,50 @@ import RestaurantCardVertical from "./RestaurantCardVertical";
 import axios from "axios";
 
 const VerticalCard = ({ item, index }) => {
-  const [products, setProducts] = useState([]);
+  const [data, setData] = useState([]);
 
-  //const [data, setData] = useState([]);
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const res = await axios.get(
-  //         process.env.REACT_APP_API_URL + "/products?populate=*",
-  //         {
-  //           headers: {
-  //             Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
-  //           },
-  //         }
-  //       );
-  //       setData(res.data.data);
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(
+          process.env.REACT_APP_API_URL + "/products?populate=*",
+          {
+            headers: {
+              Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
+            },
+          }
+        );
+        setData(res.data.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const data = [
-    {
-      id: 1,
-      img: require("../assets/images/food.png"),
-      title: "Green Curry With Egg",
-      price: "₹ 150",
-      delivery: "Free Delivery",
-    },
-    {
-      id: 2,
-      img: require("../assets/images/food.png"),
-      title: "Green Curry With Egg",
-      price: "₹ 160",
-      delivery: "Free Delivery",
-    },
-    {
-      id: 3,
-      img: require("../assets/images/food.png"),
-      title: "Green Curry With Egg",
-      price: "₹ 170",
-      delivery: "Free Delivery",
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     img: require("../assets/images/food.png"),
+  //     title: "Green Curry With Egg",
+  //     price: "₹ 150",
+  //     delivery: "Free Delivery",
+  //   },
+  //   {
+  //     id: 2,
+  //     img: require("../assets/images/food.png"),
+  //     title: "Green Curry With Egg",
+  //     price: "₹ 160",
+  //     delivery: "Free Delivery",
+  //   },
+  //   {
+  //     id: 3,
+  //     img: require("../assets/images/food.png"),
+  //     title: "Green Curry With Egg",
+  //     price: "₹ 170",
+  //     delivery: "Free Delivery",
+  //   },
+  // ];
 
   return (
     <View>

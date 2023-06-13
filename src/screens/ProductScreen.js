@@ -45,7 +45,10 @@ const ProductScreen = ({ item }) => {
     <ScrollView>
       <View style={{ position: "relative" }}>
         <Image
-          source={item.img}
+          source={
+            process.env.REACT_APP_UPLOAD_URL +
+            item.attributes.product_Image.data.attributes.url
+          }
           style={{ width: "100%", height: 200, backgroundColor: "#fff" }}
         />
         {/* <TouchableOpacity 
@@ -65,7 +68,9 @@ const ProductScreen = ({ item }) => {
             paddingTop: 30,
           }}
         >
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>{item.title}</Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+            {item?.attributes.title}
+          </Text>
           <TouchableOpacity
             style={{ paddingLeft: 118 }}
             onPress={() => setIsPressed((isPressed) => !isPressed)}
@@ -116,7 +121,9 @@ const ProductScreen = ({ item }) => {
             color="#F49F1C"
           />
 
-          <Text style={{ paddingLeft: 10 }}>{rating} Rating</Text>
+          <Text style={{ paddingLeft: 10 }}>
+            {item?.attributes.rating} Rating
+          </Text>
         </View>
         <View
           style={{
@@ -126,7 +133,7 @@ const ProductScreen = ({ item }) => {
             alignItems: "center",
           }}
         >
-          <Text>{item.description}</Text>
+          <Text>{item?.attributes.description}</Text>
         </View>
         <View style={{ paddingHorizontal: 20 }}>
           <Text style={{ fontWeight: "600", fontSize: 22 }}>Extra</Text>
@@ -219,7 +226,7 @@ const ProductScreen = ({ item }) => {
             Total Amount:{" "}
           </Text>
           <Text style={{ fontSize: 16, fontWeight: "800", color: "#F49F1C" }}>
-            ₹350
+            {item?.attributes.price}
           </Text>
         </View>
         <View style={{ flexDirection: "row" }}>

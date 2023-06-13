@@ -18,7 +18,7 @@ const RestaurantCard = ({ item }) => {
       }}
       onPress={() => {
         navigation.navigate("ProductScreen", {
-          img,
+          product_Image,
           title,
           price,
           delivery,
@@ -26,12 +26,17 @@ const RestaurantCard = ({ item }) => {
       }}
     >
       <Image
-        source={item.img}
+        source={
+          process.env.REACT_APP_UPLOAD_URL +
+          item.attributes?.product_Image?.data?.attributes?.url
+        }
         style={{ height: 100, width: 170, borderRadius: 5 }}
       />
       <View style={{ paddingHorizontal: 10 }}>
         <View style={{ paddingTop: 10 }}>
-          <Text style={{ fontWeight: "bold", fontSize: 12 }}>{item.title}</Text>
+          <Text style={{ fontWeight: "bold", fontSize: 12 }}>
+            {item?.attributes.title}
+          </Text>
         </View>
         <View style={{ flexDirection: "row", paddingVertical: 7 }}>
           <FontAwesome
@@ -66,7 +71,7 @@ const RestaurantCard = ({ item }) => {
           />
         </View>
         <View style={{ alignItems: "center", paddingTop: 7 }}>
-          <Text style={{ fontSize: 12 }}>{item.delivery}</Text>
+          <Text style={{ fontSize: 12 }}>{item?.attributes.delivery}</Text>
         </View>
       </View>
     </TouchableOpacity>
