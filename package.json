@@ -24,6 +24,7 @@
     "@sanity/client": "^6.0.1",
     "@sanity/image-url": "^1.0.2",
     "@types/react": "~18.0.27",
+    "apisauce": "^3.0.0",
     "axios": "^1.4.0",
     "dotenv": "^16.0.3",
     "expo": "~48.0.15",

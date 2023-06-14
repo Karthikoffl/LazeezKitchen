@@ -4,26 +4,43 @@ import RestaurantCardVertical from "./RestaurantCardVertical";
 import axios from "axios";
 
 const VerticalCard = ({ item, index }) => {
-  const [data, setData] = useState([]);
-
+  const [products, setProducts] = useState([]);
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          process.env.REACT_APP_API_URL + "/products?populate=*",
-          {
-            headers: {
-              Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
-            },
-          }
-        );
-        setData(res.data.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
+    getProducts();
   }, []);
+
+  const getProducts = async () => {
+    const resp = (await GlobalApi.getProducts()).data;
+    const result = resp.data.map((item) => ({
+      id: item.id,
+      title: item.attributes.title,
+      desc: item.attributes.description,
+      image: item.attributes.image.data.attributes.url,
+    }));
+    setProducts(result);
+    console.log(result);
+  };
+
+  // const [data, setData] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios.get(
+  //         process.env.REACT_APP_API_URL + "/products?populate=*",
+  //         {
+  //           headers: {
+  //             Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
+  //           },
+  //         }
+  //       );
+  //       setData(res.data.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   // const data = [
   //   {
@@ -82,7 +99,7 @@ const VerticalCard = ({ item, index }) => {
         showVerticalScrollIndicator={false}
         style={{ padding: 4, marginTop: 5 }}
       >
-        {data.map((item) => (
+        {products.map((item) => (
           <View style={{ paddingVertical: 5 }}>
             <RestaurantCardVertical item={item} key={item.id} />
           </View>

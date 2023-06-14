@@ -28,10 +28,7 @@ const RestaurantCardVertical = ({ item }) => {
     >
       <View style={{ flexDirection: "row", width: 150 }}>
         <Image
-          source={
-            process.env.REACT_APP_UPLOAD_URL +
-            item.attributes?.product_Image?.data?.attributes?.url
-          }
+          source={{ uri: item.attributes?.data?.attributes?.url }}
           style={{
             height: 90,
             width: 130,

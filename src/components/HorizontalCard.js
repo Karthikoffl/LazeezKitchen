@@ -1,30 +1,37 @@
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  FlatList,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 import RestaurantCard from "./RestaurantCard";
-import axios from "axios";
+// import axios from "axios";
+import GlobalApi from "../global/GlobalApi";
 
 const FoodCard = ({ item, index }) => {
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await axios.get(
-          process.env.REACT_APP_API_URL + "/products?populate=*",
-          {
-            headers: {
-              Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
-            },
-          }
-        );
-        console.log(res);
-        setData(res.data.data);
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
-  }, []);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const res = await axios.get(
+  //         process.env.REACT_APP_API_URL + "/products?populate=*",
+  //         {
+  //           headers: {
+  //             Authorization: "bearer " + process.env.REACT_APP_API_TOKEN,
+  //           },
+  //         }
+  //       );
+  //       console.log(res);
+  //       setData(res.data.data);
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  //   fetchData();
+  // }, []);
 
   // const data = [
   //   {
@@ -56,6 +63,22 @@ const FoodCard = ({ item, index }) => {
   //     delivery: "Free Delivery",
   //   },
   // ];
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  const getProducts = async () => {
+    const resp = (await GlobalApi.getProducts()).data;
+    const result = resp.data.map((item) => ({
+      id: item.id,
+      title: item.attributes.title,
+      desc: item.attributes.description,
+      image: item.attributes.image.data.attributes.url,
+    }));
+    setProducts(result);
+    console.log(result);
+  };
 
   return (
     <View>
@@ -91,7 +114,18 @@ const FoodCard = ({ item, index }) => {
         showsHorizontalScrollIndicator={false}
         style={{ paddingTop: 4, marginTop: 10 }}
       >
-        {data.map((item) => (
+        {/* <FlatList
+          data={products}
+          renderItem={({ item }) => (
+            <View>
+              <Image
+                source={{ uri: item.image }}
+                style={{ width: 180, height: 180 }}
+              />
+            </View>
+          )}
+        /> */}
+        {products.map((item) => (
           <View style={{ paddingHorizontal: 7 }}>
             <RestaurantCard item={item} key={item.id} />
           </View>

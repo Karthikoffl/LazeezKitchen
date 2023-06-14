@@ -26,10 +26,7 @@ const RestaurantCard = ({ item }) => {
       }}
     >
       <Image
-        source={
-          process.env.REACT_APP_UPLOAD_URL +
-          item.attributes?.product_Image?.data?.attributes?.url
-        }
+        source={{ uri: item.attributes?.data?.attributes?.url }}
         style={{ height: 100, width: 170, borderRadius: 5 }}
       />
       <View style={{ paddingHorizontal: 10 }}>
