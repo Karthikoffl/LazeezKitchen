@@ -23,27 +23,16 @@ import {
 import { TextInput } from "react-native-paper";
 import { AuthenticationContext } from "../authentication/authentication.context";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
-import * as WebBrowser from "expo-web-browser";
-import * as Google from "expo-auth-session/providers/google";
-import * as AuthSession from "expo-auth-session";
-import * as Facebook from "expo-auth-session/providers/facebook";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(true);
-  WebBrowser.maybeCompleteAuthSession();
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    androidClientId:
-      "586012277192-a1nqhnurk2rvkbl927unjj9rlcqi0532.apps.googleusercontent.com",
-    expoClientId:
-      "586012277192-f68aokhq14c500icmakro6hj9m0dpjp6.apps.googleusercontent.com",
-  });
-  const [req, res, fblogin] = Facebook.useAuthRequest({
-    clientId: "1848014555585292",
-  });
+  const [userInfo, setUserInfo] = useState();
 
-  const { onLogin, error, isLoading } = useContext(AuthenticationContext);
+  const { onLogin, Glogin, fblogin, error, isLoading } = useContext(
+    AuthenticationContext
+  );
 
   return (
     <MainView>
@@ -116,12 +105,20 @@ const Login = ({ navigation }) => {
         {/* <TouchableOpacity onPress={() => {}}>
           <FontAwesome name="envelope" size={24} color="gray" />
         </TouchableOpacity> */}
-        <TouchableOpacity onPress={() => promptAsync()}>
-          <Image source={require("../assets/images/gmail.png")} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => fblogin()}>
-          <Image source={require("../assets/images/fb.png")} />
-        </TouchableOpacity>
+        {!isLoading ? (
+          <TouchableOpacity onPress={() => Glogin(userInfo)}>
+            <Image source={require("../assets/images/gmail.png")} />
+          </TouchableOpacity>
+        ) : (
+          <ActivityIndicator animating={true} color={MD2Colors.orange500} />
+        )}
+        {!isLoading ? (
+          <TouchableOpacity onPress={() => fblogin(userInfo)}>
+            <Image source={require("../assets/images/fb.png")} />
+          </TouchableOpacity>
+        ) : (
+          <ActivityIndicator animating={true} color={MD2Colors.orange500} />
+        )}
       </SocialLoginView>
       <FooterView>
         <Text style={{ textAlign: "center", justifyContent: "center" }}>
