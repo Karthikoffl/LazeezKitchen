@@ -43,13 +43,7 @@ const Login = ({ navigation }) => {
     clientId: "1848014555585292",
   });
 
-  const {
-    onLogin,
-    // onGoogleButtonPress,
-    // onFacebookButtonPress,
-    error,
-    isLoading,
-  } = useContext(AuthenticationContext);
+  const { onLogin, error, isLoading } = useContext(AuthenticationContext);
 
   return (
     <MainView>
