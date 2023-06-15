@@ -11,9 +11,7 @@ const MapScreen = () => {
   });
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} region={mapRegion}>
-        <Marker coordinate={mapRegion} title="Marker" />
-      </MapView>
+      <MapView style={styles.map} />
     </View>
   );
 };
@@ -27,7 +25,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   map: {
-    width: "100%",
     height: "100%",
+    width: "100%",
   },
 });
