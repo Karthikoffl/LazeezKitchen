@@ -10,7 +10,7 @@ import {
   Pressable,
   TextInput,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useSelector } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, FontAwesome, MaterialIcons } from "@expo/vector-icons";
 import { Surface } from "react-native-paper";
@@ -18,11 +18,14 @@ import DashedLine from "react-native-dashed-line";
 import IncrementRadio from "../components/IncrementRadio";
 import SwitchSelector from "react-native-switch-selector";
 import { removeFromCart } from "../redux/reducers/cartReducer";
+import { useDispatch } from "react-redux";
 
 const CartScreen = () => {
   const navigation = useNavigation();
   const [refreshing, setRefreshing] = useState(true);
   const [dataSource, setDataSource] = useState([]);
+
+  const dispatch = useDispatch();
 
   const removeItemFromCart = (item) => {
     dispatch(removeFromCart(item));

@@ -5,8 +5,10 @@ import {
   incrementQuantity,
   removeFromCart,
 } from "../redux/reducers/cartReducer";
+import { useDispatch } from "react-redux";
 
 const IncrementRadio = () => {
+  const dispatch = useDispatch();
   let [count, setCount] = useState(0);
   function increment() {
     setCount(function (prevCount) {
