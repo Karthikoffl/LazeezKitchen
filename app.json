@@ -2,6 +2,7 @@
   "expo": {
     "name": "lazzez-app",
     "slug": "lazzez-app",
+    "scheme": ["lazeez-kitchen", "fb1848014555585292"],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

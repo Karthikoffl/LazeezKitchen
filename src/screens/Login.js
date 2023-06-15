@@ -23,18 +23,16 @@ import {
 import { TextInput } from "react-native-paper";
 import { AuthenticationContext } from "../authentication/authentication.context";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
-import * as Animatable from "react-native-animatable";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {
-    onLogin,
-    // onGoogleButtonPress,
-    // onFacebookButtonPress,
-    error,
-    isLoading,
-  } = useContext(AuthenticationContext);
+  const [visible, setVisible] = useState(true);
+  const [userInfo, setUserInfo] = useState();
+
+  const { onLogin, Glogin, fblogin, error, isLoading } = useContext(
+    AuthenticationContext
+  );
 
   return (
     <MainView>
@@ -60,19 +58,23 @@ const Login = ({ navigation }) => {
               autoCapitalize="none"
             />
           </View>
-          <Animatable.View>
-            <TextInput
-              style={{ marginTop: 20 }}
-              mode="outlined"
-              activeOutlineColor="#F49F1C"
-              placeholder="Password"
-              label="Password"
-              autoCapitalize="none"
-              secureTextEntry
-              onChangeText={(p) => setPassword(p)}
-              value={password}
-            />
-          </Animatable.View>
+          <TextInput
+            value={password}
+            style={{ marginTop: 20 }}
+            secureTextEntry={visible}
+            mode="outlined"
+            activeOutlineColor="#F49F1C"
+            placeholder="Password"
+            label="Password"
+            autoCapitalize="none"
+            onChangeText={(p) => setPassword(p)}
+            right={
+              <TextInput.Icon
+                icon={visible ? "eye-off-outline" : "eye-outline"}
+                onPress={() => setVisible(!visible)}
+              />
+            }
+          />
           {!isLoading ? (
             <LoginButton onPress={() => onLogin(email, password)}>
               <ButtonText>Login</ButtonText>
@@ -103,12 +105,20 @@ const Login = ({ navigation }) => {
         {/* <TouchableOpacity onPress={() => {}}>
           <FontAwesome name="envelope" size={24} color="gray" />
         </TouchableOpacity> */}
-        <TouchableOpacity onPress={() => {}}>
-          <Image source={require("../assets/images/gmail.png")} />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
-          <Image source={require("../assets/images/fb.png")} />
-        </TouchableOpacity>
+        {!isLoading ? (
+          <TouchableOpacity onPress={() => Glogin(userInfo)}>
+            <Image source={require("../assets/images/gmail.png")} />
+          </TouchableOpacity>
+        ) : (
+          <ActivityIndicator animating={true} color={MD2Colors.orange500} />
+        )}
+        {!isLoading ? (
+          <TouchableOpacity onPress={() => fblogin(userInfo)}>
+            <Image source={require("../assets/images/fb.png")} />
+          </TouchableOpacity>
+        ) : (
+          <ActivityIndicator animating={true} color={MD2Colors.orange500} />
+        )}
       </SocialLoginView>
       <FooterView>
         <Text style={{ textAlign: "center", justifyContent: "center" }}>
