@@ -5,8 +5,24 @@ import axios from "axios";
 
 const VerticalCard = ({ item, index }) => {
   const [products, setProducts] = useState([]);
+  useEffect(() => {
+    getProducts();
+  }, []);
 
-  //const [data, setData] = useState([]);
+  const getProducts = async () => {
+    const resp = (await GlobalApi.getProducts()).data;
+    const result = resp.data.map((item) => ({
+      id: item.id,
+      title: item.attributes.title,
+      desc: item.attributes.description,
+      image: item.attributes.image.data.attributes.url,
+    }));
+    setProducts(result);
+    console.log(result);
+  };
+
+  // const [data, setData] = useState([]);
+
   // useEffect(() => {
   //   const fetchData = async () => {
   //     try {
@@ -26,29 +42,29 @@ const VerticalCard = ({ item, index }) => {
   //   fetchData();
   // }, []);
 
-  const data = [
-    {
-      id: 1,
-      img: require("../assets/images/food.png"),
-      title: "Green Curry With Egg",
-      price: "₹ 150",
-      delivery: "Free Delivery",
-    },
-    {
-      id: 2,
-      img: require("../assets/images/food.png"),
-      title: "Green Curry With Egg",
-      price: "₹ 160",
-      delivery: "Free Delivery",
-    },
-    {
-      id: 3,
-      img: require("../assets/images/food.png"),
-      title: "Green Curry With Egg",
-      price: "₹ 170",
-      delivery: "Free Delivery",
-    },
-  ];
+  // const data = [
+  //   {
+  //     id: 1,
+  //     img: require("../assets/images/food.png"),
+  //     title: "Green Curry With Egg",
+  //     price: "₹ 150",
+  //     delivery: "Free Delivery",
+  //   },
+  //   {
+  //     id: 2,
+  //     img: require("../assets/images/food.png"),
+  //     title: "Green Curry With Egg",
+  //     price: "₹ 160",
+  //     delivery: "Free Delivery",
+  //   },
+  //   {
+  //     id: 3,
+  //     img: require("../assets/images/food.png"),
+  //     title: "Green Curry With Egg",
+  //     price: "₹ 170",
+  //     delivery: "Free Delivery",
+  //   },
+  // ];
 
   return (
     <View>
@@ -83,7 +99,7 @@ const VerticalCard = ({ item, index }) => {
         showVerticalScrollIndicator={false}
         style={{ padding: 4, marginTop: 5 }}
       >
-        {data.map((item) => (
+        {products.map((item) => (
           <View style={{ paddingVertical: 5 }}>
             <RestaurantCardVertical item={item} key={item.id} />
           </View>

@@ -23,18 +23,27 @@ import {
 import { TextInput } from "react-native-paper";
 import { AuthenticationContext } from "../authentication/authentication.context";
 import { ActivityIndicator, MD2Colors } from "react-native-paper";
-import * as Animatable from "react-native-animatable";
+import * as WebBrowser from "expo-web-browser";
+import * as Google from "expo-auth-session/providers/google";
+import * as AuthSession from "expo-auth-session";
+import * as Facebook from "expo-auth-session/providers/facebook";
 
 const Login = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const {
-    onLogin,
-    // onGoogleButtonPress,
-    // onFacebookButtonPress,
-    error,
-    isLoading,
-  } = useContext(AuthenticationContext);
+  const [visible, setVisible] = useState(true);
+  WebBrowser.maybeCompleteAuthSession();
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    androidClientId:
+      "586012277192-a1nqhnurk2rvkbl927unjj9rlcqi0532.apps.googleusercontent.com",
+    expoClientId:
+      "586012277192-f68aokhq14c500icmakro6hj9m0dpjp6.apps.googleusercontent.com",
+  });
+  const [req, res, fblogin] = Facebook.useAuthRequest({
+    clientId: "1848014555585292",
+  });
+
+  const { onLogin, error, isLoading } = useContext(AuthenticationContext);
 
   return (
     <MainView>
@@ -60,19 +69,23 @@ const Login = ({ navigation }) => {
               autoCapitalize="none"
             />
           </View>
-          <Animatable.View>
-            <TextInput
-              style={{ marginTop: 20 }}
-              mode="outlined"
-              activeOutlineColor="#F49F1C"
-              placeholder="Password"
-              label="Password"
-              autoCapitalize="none"
-              secureTextEntry
-              onChangeText={(p) => setPassword(p)}
-              value={password}
-            />
-          </Animatable.View>
+          <TextInput
+            value={password}
+            style={{ marginTop: 20 }}
+            secureTextEntry={visible}
+            mode="outlined"
+            activeOutlineColor="#F49F1C"
+            placeholder="Password"
+            label="Password"
+            autoCapitalize="none"
+            onChangeText={(p) => setPassword(p)}
+            right={
+              <TextInput.Icon
+                icon={visible ? "eye-off-outline" : "eye-outline"}
+                onPress={() => setVisible(!visible)}
+              />
+            }
+          />
           {!isLoading ? (
             <LoginButton onPress={() => onLogin(email, password)}>
               <ButtonText>Login</ButtonText>
@@ -103,10 +116,10 @@ const Login = ({ navigation }) => {
         {/* <TouchableOpacity onPress={() => {}}>
           <FontAwesome name="envelope" size={24} color="gray" />
         </TouchableOpacity> */}
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => promptAsync()}>
           <Image source={require("../assets/images/gmail.png")} />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => {}}>
+        <TouchableOpacity onPress={() => fblogin()}>
           <Image source={require("../assets/images/fb.png")} />
         </TouchableOpacity>
       </SocialLoginView>

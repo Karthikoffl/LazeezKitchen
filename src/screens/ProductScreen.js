@@ -14,36 +14,13 @@ import IncrementRadio from "../components/IncrementRadio";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../redux/reducers/cartReducer";
 
-const API_URL = "http://localhost:1337/api/products";
-
-const ProductScreen = ({ item, index }) => {
+const ProductScreen = ({ item }) => {
   const navigation = useNavigation();
   const [isPressed, setIsPressed] = useState(false);
   const [selected, setSelected] = useState(false);
   const [selected1, setSelected1] = useState(false);
   const [selected2, setSelected2] = useState(false);
   const [selected3, setSelected3] = useState(false);
-
-  const [usersData, setUsersData] = useState([]);
-
-  const getUsersData = () => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-    useEffect(() => {
-      getUsersData();
-    }, []);
-
-    fetch(API_URL, requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        setUsersData(result?.data);
-      })
-      .catch((error) => {
-        console.log("error", error);
-      });
-  };
 
   const [value, setValue] = useState(0);
   const extras = [
@@ -53,7 +30,7 @@ const ProductScreen = ({ item, index }) => {
   ];
 
   // const {
-  //   params: { id, title, image, delivery, rating },
+  //   params: { id, title, img, delivery, rating },
   // } = useRoute();
 
   const cart = useSelector((state) => state.cart.cart);
@@ -68,7 +45,10 @@ const ProductScreen = ({ item, index }) => {
     <ScrollView>
       <View style={{ position: "relative" }}>
         <Image
-          source={item.img}
+          source={
+            process.env.REACT_APP_UPLOAD_URL +
+            item.attributes.product_Image.data.attributes.url
+          }
           style={{ width: "100%", height: 200, backgroundColor: "#fff" }}
         />
         {/* <TouchableOpacity 
@@ -88,7 +68,9 @@ const ProductScreen = ({ item, index }) => {
             paddingTop: 30,
           }}
         >
-          <Text style={{ fontSize: 20, fontWeight: "bold" }}>{item.title}</Text>
+          <Text style={{ fontSize: 20, fontWeight: "bold" }}>
+            {item?.attributes.title}
+          </Text>
           <TouchableOpacity
             style={{ paddingLeft: 118 }}
             onPress={() => setIsPressed((isPressed) => !isPressed)}
@@ -139,7 +121,9 @@ const ProductScreen = ({ item, index }) => {
             color="#F49F1C"
           />
 
-          <Text style={{ paddingLeft: 10 }}>{rating} Rating</Text>
+          <Text style={{ paddingLeft: 10 }}>
+            {item?.attributes.rating} Rating
+          </Text>
         </View>
         <View
           style={{
@@ -149,7 +133,7 @@ const ProductScreen = ({ item, index }) => {
             alignItems: "center",
           }}
         >
-          <Text>{item.description}</Text>
+          <Text>{item?.attributes.description}</Text>
         </View>
         <View style={{ paddingHorizontal: 20 }}>
           <Text style={{ fontWeight: "600", fontSize: 22 }}>Extra</Text>
@@ -242,7 +226,7 @@ const ProductScreen = ({ item, index }) => {
             Total Amount:{" "}
           </Text>
           <Text style={{ fontSize: 16, fontWeight: "800", color: "#F49F1C" }}>
-            ₹350
+            {item?.attributes.price}
           </Text>
         </View>
         <View style={{ flexDirection: "row" }}>
