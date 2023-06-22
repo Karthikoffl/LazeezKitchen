@@ -1,11 +1,18 @@
 import { StatusBar } from "react-native";
-// import { ThemeProvider } from "styled-components/native";
+import { ThemeProvider } from "styled-components/native";
+import { theme } from "./src/theme";
 import { StatusBar as ExpoStatusBar } from "expo-status-bar";
 import Navigation from "./src/navigation";
 import { AuthenticationContextProvider } from "./src/authentication/authentication.context";
 import { initializeApp } from "firebase/app";
 import store from "./src/redux/store";
 import { Provider } from "react-redux";
+
+// import {
+//   useFonts as useOswald,
+//   Oswald_400Regular,
+// } from "@expo-google-fonts/oswald";
+// import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDQ2IANGd25OLeLXpQf96sIgKo7skCCFEc",
@@ -21,13 +28,27 @@ initializeApp(firebaseConfig);
 export default function App() {
   StatusBar.setBarStyle("dark-content", true);
 
+  // const [oswaldLoaded] = useOswald({
+  //   Oswald_400Regular,
+  // });
+
+  // const [latoLoaded] = useLato({
+  //   Lato_400Regular,
+  // });
+
+  // if (!oswaldLoaded || !latoLoaded) {
+  //   return null;
+  // }
+
   return (
     <>
       <Provider store={store}>
-        <AuthenticationContextProvider>
-          <Navigation />
-        </AuthenticationContextProvider>
-        <ExpoStatusBar style="auto" />
+        <ThemeProvider theme={theme}>
+          <AuthenticationContextProvider>
+            <Navigation />
+          </AuthenticationContextProvider>
+          <ExpoStatusBar style="auto" />
+        </ThemeProvider>
       </Provider>
     </>
   );
